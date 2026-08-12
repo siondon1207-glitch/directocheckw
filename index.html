@@ -1,23 +1,905 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "볼보 S90L (Volvo S90 Long Wheelbase)",
+      "image": "https://data.reliabledone.com/images/volvo-s90l-main.jpg",
+      "description": "2026년형 볼보 S90L 가격, 제원, 옵션 비교 및 모의견적 서비스. 마일드 하이브리드 B5 및 플러그인 하이브리드 T8 모델 분석.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Volvo"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "65300000",
+        "highPrice": "91400000",
+        "offerCount": "6"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-primary: #FAF8F5;
+            --text-primary: #2C3E50;
+            --text-secondary: #4F6D7A;
+            --accent-color: #B8860B;
+            --accent-hover: #9A6F06;
+            --card-bg: #FFFFFF;
+            --border-color: #E5E0D8;
+            --soft-blue: #EBF1F5;
+            --shadow-color: rgba(44, 62, 80, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            letter-spacing: -0.02em;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin-top: 25px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color);
+            color: #FFFFFF;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        section h2 {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        section h3 {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #34495E;
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background-color: var(--bg-primary);
+            border-left: 4px solid var(--text-secondary);
+            padding: 20px;
+            border-radius: 4px;
+            margin: 25px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            margin: 30px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--soft-blue);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 15px 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            color: #555;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #FAF9F6;
+        }
+
+        /* Interactive Grid for Calculators and Forms */
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .interactive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .interactive-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .interactive-card h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--bg-primary);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-range {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--accent-color);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .calc-result-box {
+            background-color: var(--soft-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .calc-result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .calc-result-row.total {
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
+        /* Diagnostic Quiz Result */
+        .diagnostic-result {
+            display: none;
+            background-color: #FAF5EF;
+            border: 1px dashed var(--accent-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .diagnostic-result h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Keyword Cloud and Styling */
+        .keyword-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .keyword-tag {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            padding: 6px 12px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .keyword-tag:hover {
+            background-color: var(--soft-blue);
+            color: var(--text-primary);
+        }
+
+        /* Reference Links */
+        .reference-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .reference-list li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: var(--bg-primary);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+        }
+
+        .reference-list li:hover {
+            transform: translateY(-2px);
+        }
+
+        .reference-list a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .reference-list span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            color: #555;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Visual Chart Simulation */
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .chart-bar-group {
+            margin-bottom: 15px;
+        }
+
+        .chart-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+        }
+
+        .chart-bar-wrapper {
+            background-color: var(--border-color);
+            border-radius: 4px;
+            height: 12px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .chart-bar-fill {
+            background-color: var(--accent-color);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--text-primary);
+            color: #FFFFFF;
+            padding: 15px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>2026년형 볼보 S90L 가격표 및 제원 가이드</h1>
+        <p>스웨덴의 독보적인 프리미엄 비즈니스 세단, 볼보 S90L의 트림별 판매 금액과 상세 리스/할부 견적, 실소유주들의 생생한 장단점 분석 자료를 전해드립니다.</p>
+        <nav aria-label="메인 내비게이션">
+            <ul>
+                <li><a href="#price-table">트림별 판매 가격</a></li>
+                <li><a href="#specification">기술 제원 및 연비</a></li>
+                <li><a href="#interactive-zone">모의 견적 계산기</a></li>
+                <li><a href="#deep-analysis">심층 전문가 분석</a></li>
+                <li><a href="#owner-reviews">오너 실소유 후기</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+
+        <div class="interactive-grid" id="interactive-zone">
+            <!-- Calculator Card -->
+            <div class="interactive-card">
+                <h3>실시간 볼보 S90L 모의 견적 계산기</h3>
+                <p>구매 조건과 희망하는 트림을 선택하시면 2026년도 최신 이율을 기준으로 산출된 실시간 예상 납입 금액과 부대 비용을 바로 계산해 보실 수 있습니다.</p>
+                
+                <div class="form-group">
+                    <label for="trim_select">모델 및 세부 트림 선택</label>
+                    <select id="trim_select" class="form-control" onchange="calculateQuote()">
+                        <option value="65300000">볼보 S90 B5 플러스 브라이트 (65,300,000원)</option>
+                        <option value="71300000" selected>볼보 S90 B5 울트라 브라이트 (71,300,000원)</option>
+                        <option value="73900000">볼보 S90 B5 울트라 브라이트 에어서스펜션 (73,900,000원)</option>
+                        <option value="91400000">볼보 S90 T8 AWD 울트라 브라이트 PHEV (91,400,000원)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="purchase_type">구매 방식 선택</label>
+                    <select id="purchase_type" class="form-control" onchange="calculateQuote()">
+                        <option value="lease">개인/법인 리스 (잔존가치 보장)</option>
+                        <option value="rent">장기렌트 요금제</option>
+                        <option value="installment">일반 금융 할부</option>
+                        <option value="cash">일시불 완납</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="deposit_range">초기 선납금 설정: <span id="deposit_val">30%</span></label>
+                    <input type="range" id="deposit_range" min="0" max="50" step="10" value="30" class="form-range" oninput="calculateQuote()">
+                </div>
+
+                <div class="form-group">
+                    <label for="period_select">이용 기간 선택</label>
+                    <select id="period_select" class="form-control" onchange="calculateQuote()">
+                        <option value="36">36개월</option>
+                        <option value="48">48개월</option>
+                        <option value="60" selected>60개월</option>
+                    </select>
+                </div>
+
+                <div class="calc-result-box">
+                    <div class="calc-result-row">
+                        <span>공식 차량 가액</span>
+                        <span id="car_price_display">71,300,000 원</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>예상 취등록세 (약 7%)</span>
+                        <span id="tax_display">4,991,000 원</span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span>초기 준비 금액 (보증금/선납금)</span>
+                        <span id="deposit_display">21,390,000 원</span>
+                    </div>
+                    <div class="calc-result-row total">
+                        <span>예상 월 납입 요금</span>
+                        <span id="monthly_display">891,000 원</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagnostic Card -->
+            <div class="interactive-card">
+                <h3>내게 맞는 볼보 S90L 최적 트림 진단</h3>
+                <p>간단한 라이프스타일 질문에 답하시면 어떤 종류의 파워트레인과 트림 옵션이 예산과 용도에 가장 알맞은지 즉시 분석해 드립니다.</p>
+                
+                <div class="form-group">
+                    <label for="diag_q1">연간 평균 예상 주행거리</label>
+                    <select id="diag_q1" class="form-control">
+                        <option value="short">10,000km 이하 (도심 및 단거리 중심)</option>
+                        <option value="medium">10,000km ~ 20,000km (출퇴근 및 주말 여가)</option>
+                        <option value="long">20,000km 초과 (지방 출장 및 장거리 주행)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="diag_q2">차량 구매 시 가장 중시하는 요소</label>
+                    <select id="diag_q2" class="form-control">
+                        <option value="value">경제적인 실구매가와 우수한 가성비</option>
+                        <option value="luxury">프리미엄 사운드와 세련된 실내 감성 옵션</option>
+                        <option value="performance">하이브리드의 강력한 동력 성능과 친환경 가치</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="diag_q3">에어 서스펜션 선호도</label>
+                    <select id="diag_q3" class="form-control">
+                        <option value="none">기본적인 탄탄하고 안정적인 승차감도 충분함</option>
+                        <option value="airsus">방지턱과 노면 충격을 완전히 걸러주는 고급스러운 승차감 희망</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn-submit" onclick="runDiagnostic()">맞춤 트림 진단 분석하기</button>
+
+                <div id="diag_result_box" class="diagnostic-result">
+                    <h4 id="diag_result_title">추천 트림 결과</h4>
+                    <p id="diag_result_desc">진단 결과를 바탕으로 한 가장 합리적인 옵션 매칭입니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <section id="price-table">
+            <h2>2026년형 볼보 S90L 공식 가격표 및 월 납입 비용 비교</h2>
+            <p>스웨덴의 대표적인 프리미엄 브랜드 볼보에서 내놓은 플래그십 준대형 세단, 2026 볼보 S90 모델은 트림과 옵션 구성에 따라 합리적인 금액대를 자랑합니다. 국내 시장에 수입되는 모든 S90 모델은 사실상 휠베이스가 기존보다 120mm 길어진 롱휠베이스 사양인 볼보 S90L 버전을 기반으로 삼고 있어 2열의 광활한 거주성이 가장 큰 강점으로 작용합니다. 아래는 2026년 기준 공식 판매 가격과 다양한 취득 조건에 따른 분석 자료입니다.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>세부 모델명</th>
+                            <th>엔진 형식</th>
+                            <th>공식 판매 가격</th>
+                            <th>예상 취등록세 (7%)</th>
+                            <th>60개월 리스 월 요금 (평균)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>볼보 S90 B5 플러스 브라이트</td>
+                            <td>가솔린 MHEV (마일드 하이브리드)</td>
+                            <td>65,300,000 원</td>
+                            <td>4,571,000 원</td>
+                            <td>약 780,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>볼보 S90 B5 울트라 브라이트</td>
+                            <td>가솔린 MHEV (마일드 하이브리드)</td>
+                            <td>71,300,000 원</td>
+                            <td>4,991,000 원</td>
+                            <td>약 850,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>볼보 S90 B5 울트라 브라이트 (에어서스)</td>
+                            <td>가솔린 MHEV (마일드 하이브리드)</td>
+                            <td>73,900,000 원</td>
+                            <td>5,173,000 원</td>
+                            <td>약 890,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>볼보 S90 B5 울트라 다크 (에어서스)</td>
+                            <td>가솔린 MHEV (마일드 하이브리드)</td>
+                            <td>73,900,000 원</td>
+                            <td>5,173,000 원</td>
+                            <td>약 890,000 원</td>
+                        </tr>
+                        <tr>
+                            <td>볼보 S90 T8 AWD 울트라 브라이트</td>
+                            <td>플러그인 하이브리드 (PHEV)</td>
+                            <td>91,400,000 원</td>
+                            <td>6,398,000 원</td>
+                            <td>약 1,120,000 원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <p>상기 제시된 월 리스 비용은 일반적인 선납금 30% 납입 기준의 예상치입니다. 전국의 최저가 성지 대리점 좌표 정보나 딜러사별 비공식 할인 프로모션 혜택 적용에 따라 최종 납부할 실구매 가격은 크게 변동될 수 있습니다. 정밀한 금융 컨설팅이나 온라인 다이렉트 상담 어플 및 모바일 앱 견적기를 거쳐 최적의 포트폴리오를 설계하시는 방법을 추천해 드립니다.</p>
+            </div>
+        </section>
+
+        <section id="specification">
+            <h2>2026년형 볼보 S90L 제원 및 엔진 종류별 기술 분석</h2>
+            <p>2026 볼보 S90 모델은 기존의 정통적인 가솔린 순수 내연기관에서 완전히 탈피하여 전 라인업에 친환경 마일드 하이브리드 및 플러그인 하이브리드 파워트레인을 도입했습니다. 고효율의 통합 회생 제동 시스템과 결합한 48V 배터리가 시동을 걸거나 가속 시 엔진의 동력을 부드럽게 지원하여 정숙성과 연료 소비 효율을 획기적으로 개선했습니다.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분 제원</th>
+                            <th>S90 B5 MHEV 모델</th>
+                            <th>S90 T8 PHEV 모델</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>엔진 및 연료</td>
+                            <td>가솔린 직렬 4기통 싱글 터보 + 전기모터</td>
+                            <td>가솔린 직렬 4기통 터보 + 고성능 구동 모터</td>
+                        </tr>
+                        <tr>
+                            <td>배기량</td>
+                            <td>1,969 cc</td>
+                            <td>1,969 cc</td>
+                        </tr>
+                        <tr>
+                            <td>엔진 최고 출력</td>
+                            <td>250 마력 (모터 어시스트 13.6마력 추가)</td>
+                            <td>합산 출력 455 마력 (엔진 317 + 모터 143)</td>
+                        </tr>
+                        <tr>
+                            <td>최대 토크</td>
+                            <td>35.7 kg.m (영역대 1,800~4,800 rpm)</td>
+                            <td>합산 토크 72.3 kg.m</td>
+                        </tr>
+                        <tr>
+                            <td>구동 방식</td>
+                            <td>전륜 구동 (FWD)</td>
+                            <td>상시 사륜 구동 (AWD)</td>
+                        </tr>
+                        <tr>
+                            <td>정부 공인 연비</td>
+                            <td>복합 연비 11.5 km/l (도심 10.0 / 고속 14.2)</td>
+                            <td>복합 연비 13.0 km/l (순수 전기 1회 완충시 59km 주행)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">주요 E세그먼트 플래그십 차량 2열 레그룸 길이 비교 (단위: mm)</div>
+                <div class="chart-bar-group">
+                    <div class="chart-bar-label">
+                        <span>볼보 S90L (롱휠베이스 사양)</span>
+                        <span>1,026 mm</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="chart-bar-group">
+                    <div class="chart-bar-label">
+                        <span>경쟁 수입 E세그먼트 표준 모델</span>
+                        <span>890 mm</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar-fill" style="width: 86.7%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <p>볼보 S90L의 가장 커다란 무기는 단연 동급 경쟁 차종 중 제일 우수한 축간거리(휠베이스 3,060mm)를 통해 확보한 여유로운 실내 공간입니다. 쇼퍼드리븐(기사가 운전하는 차량) 성격의 의전용 비즈니스 세단으로 활용해도 손색이 없을 만큼, 회장님 차라는 별칭이 어색하지 않을 수준의 거주 편의성을 안겨줍니다.</p>
+        </section>
+
+        <section id="deep-analysis">
+            <h2>심층 분석: 볼보 S90L 가격 형성과 2026년형 시장 분석</h2>
+            <p>국내 준대형 세단 시장에서 볼보 S90L 가격 정책은 매우 영리하게 포지셔닝 되어 있습니다. 독일 브랜드의 준대형급 엔트리 모델 수준의 금액대로 실질적인 럭셔리 대형급에 달하는 거대한 차체 크기와 우수한 패밀리카의 안락함을 누릴 수 있도록 구성되었기 때문입니다. 특히 2026년형으로 거듭난 두 번째 페이스리프트는 그동안 지적되던 다소 정적인 센터 스크린 화면을 최신 디지털 트렌드에 발맞춰 대폭 개선했습니다. 화면 크기를 확장하고 TMAP 모빌리티 기반의 고도화된 한글 네비게이션 제어 시스템을 완벽히 이식하여 사용자의 직관적인 컨트롤 편의성을 향상시켰습니다.</p>
+
+            <p>기본 등급인 S90 B5 플러스 트림의 경우 6,530만 원이라는 합리적인 실구매 예상 금액을 갖추고 있어, 가격 대비 가장 훌륭한 안전 사양과 준대형 공간 효율을 경험하고 싶은 오너들의 입문용 차량으로 높은 관심을 얻고 있습니다. 반면 주력 판매를 도맡고 있는 B5 울트라 브라이트는 7,130만 원에 판매되며 600만 원이라는 가격 격차 속에서 얻을 수 있는 무수한 실내 감성 가치가 그 장점을 대변합니다. 영국의 하이엔드 사운드 명가인 바워스앤윌킨스 프리미엄 오디오 시스템, 나파 가죽 시트, 등받이 마사지 편의장비, 그리고 아름다운 스웨덴 오레포스 크리스탈 기어노브 옵션이 기본 제공되기 때문에 대다수 오너들이 울트라 트림을 제일 먼저 선택하고 계약을 신청하는 추세입니다.</p>
+
+            <p>수입차 마니아들이 모여드는 디시인사이드 자동차 갤러리나 보배드림, 에펨코리아(펨코) 같은 자동차 커뮤니티 공간을 살펴보면, 기존 마일드 하이브리드의 탄탄한 고속 주행 질감을 넘어선 승차감 향상에 대한 의견이 주를 이룹니다. 볼보자동차코리아는 이 같은 국내 소비자 니즈를 적극 반영하여, 2026년식 생산분부터는 B5 울트라 트림 선택 시 260만 원만 추가하면 후륜 에어 서스펜션을 옵션으로 가입하여 장착할 수 있도록 선택 폭을 넓혔습니다. 불규칙한 노면 주행 시 발생하는 미세 진동을 깔끔하게 걸러줌으로써 수입 대형 플래그십 차량에 걸맞은 이상적인 구동력과 부드러운 승차감 조화를 만끽할 수 있게 되었습니다.</p>
+
+            <p>또한 볼보 브랜드 내에서 프리미엄 포트폴리오를 유지하는 세단형 볼보 S60 및 왜건 스타일의 볼보 V90 크로스컨트리, 그리고 플래그십 SUV인 볼보 XC90 및 도심형 패밀리 세그먼트인 볼보 XC60, 볼보 XC40 라인업과 비교해 보아도 넓은 뒷좌석 거주 공간과 실속 있는 편의성은 볼보 S90L을 향한 압도적인 추천으로 귀결됩니다. 최근 볼보는 차세대 완전 전동화 모델인 대형 SUV 볼보 EX90, 컴팩트 볼보 EX30, 준중형 쿠페형 볼보 EC40과 더불어 볼보 EX40 등 순수 배터리 구동 기반의 첨단 모델 다각화에 집중하고 있으며, 내연기관과 전동화 가교 역할을 수행하는 마일드 하이브리드 S90L의 장인 정신은 럭셔리 내연기관의 완성도를 입증하는 훌륭한 대안입니다.</p>
+        </section>
+
+        <section id="owner-reviews">
+            <h2>인터넷 커뮤니티 실제 소유주 후기 및 장단점 분석</h2>
+            <p>볼보 S90L을 소유하고 있는 차주들의 내돈내산 장기 탑승 후기와 인터넷의 냉정한 평가들을 보배드림 및 에펨코리아 동호회 분석을 통하여 세밀하게 핵심만 요약해 드립니다.</p>
+
+            <h3>실제 탑승 오너가 밝히는 확실한 장점</h3>
+            <p>첫째, 동급 세그먼트에서 다른 차량들을 압도하는 공간의 효율성입니다. 2열 좌석에 탑승 시 성인 남성이 다리를 길게 뻗고 앉아도 앞 좌석 시트백에 무릎이 닿지 않을 만큼의 레그룸 공간을 선사해 주므로 패밀리카로서의 안전성과 쾌적함이 단연 최고라는 평을 받습니다.</p>
+            <p>둘째, 바워스앤윌킨스 프리미엄 음향 시스템의 명징한 전달력입니다. 소리의 예술이라고 불릴 정도로 예민한 주파수 튜닝을 통해 내부에 구현되는 고품격 사운드는 마치 콘서트홀 한가운데 서 있는 듯한 가치를 전해 줍니다. 7천만 원대 수입 차량 중에서는 제일 수준 높은 오디오 성능을 가졌다는 데 다수가 공감합니다.</p>
+            <p>셋째, 전 트림에 일관되게 아낌없이 탑재된 철저한 안전 장치와 주행 보조 패키지입니다. 볼보가 최초로 상용화한 시티 세이프티, 파일럿 어시스트 등은 고속도로 정체 구간이나 우천 시 안전운행의 든든한 동반자가 되어 줍니다.</p>
+
+            <h3>실제 탑승 오너가 뽑은 단점과 아쉬운 점</h3>
+            <p>첫째, 글로벌 유통 다각화에 따라 중국 다칭(Daqing) 공장에서 전량 위탁 조립 및 생산되어 수입된다는 점입니다. 조립 불량률이나 마감 퀄리티 측면에서는 엄격한 볼보 스웨덴 품질 관리가 동일하게 고수되어 차이가 전혀 없다는 것이 객관적으로 증명되었으나, 일부 오너들에게 감성적인 거부감 요인으로 간혹 회자되곤 합니다.</p>
+            <p>둘째, 5미터가 넘어가는 대형 전장 구조상 좁은 기계식 주차 타워 진입이 다소 어렵고, 최소 회전 반경이 상당히 크다는 점입니다. 좁은 주택가 골목길이나 회전 반경이 넉넉하지 못한 아파트 주차장 통로 주행 시 운전이 서툰 비기너의 경우 처음 차 폭과 회전감에 익숙해지는 다소 시간이 필요하다는 애로사항이 있습니다.</p>
+
+            <div class="highlight-box">
+                <p>일반적인 내연기관 및 전동화 마켓에서 현금 할인이나 비공식 지원금, 딜러 서비스 사은품 및 현금지원 등의 혜택 설계가 인색하기로 소문난 볼보 브랜드 특성상, 초기 비용을 최소화하고 감가상각 하락 리스크를 방어하는 해결책으로 볼보 리스 또는 렌트 등의 특수 금융을 가입하는 비중이 수년간 지속적으로 순위가 오르고 있습니다.</p>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ) - 볼보 S90L 편</h2>
+            <p>볼보 S90L을 구입하기 전에 많은 소비자들이 구글, 네이버 및 유튜브 등 포털 플랫폼에서 검색하고 질문하시는 핵심 정보들을 정리해 드립니다.</p>
+
+            <div class="faq-item">
+                <div class="faq-question">Q1. 볼보 S90L의 신차 출고 예상 대기 기간은 보통 얼마인가요?</div>
+                <div class="faq-answer">
+                    A1. 현재 2026년식 두 번째 페이스리프트 모델 출시 이후 대기 기간은 트림과 선호 컬러에 따라 3개월에서 길게는 6개월 정도 소요됩니다. 가장 수요가 집중된 B5 울트라 브라이트 등급의 크리스탈 화이트나 플래티넘 그레이 컬러의 대기가 제일 길며, 금융 에이전시 업체의 미리 확보된 즉시 출고 재고 수량을 매칭하는 다이렉트 컨설팅 방식을 이용하면 계약 후 1~2주일 이내 인도받는 성지 루트도 존재합니다.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q2. 중국 생산 품질 이슈가 실제 운행 시 조립 품질 불량이나 결함으로 나타나나요?</div>
+                <div class="faq-answer">
+                    A2. 스웨덴 본사 시스템을 고스란히 이식받은 스마트 첨단 라인에서 동일한 부품 사양으로 생산되며, 미국 IIHS 충돌 안전 테스트에서도 최고 등급을 동일하게 획득하여 품질 완성도 편차는 발생하지 않습니다. 보배드림이나 동호회의 실소유 오너들의 내돈내산 수천 킬로미터 장기 주행 사용기를 모니터링해도 조립 불량이나 결함 발생률이 타 프리미엄 수입차 세그먼트에 비해 무척 낮다는 후기가 지배적입니다.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q3. 볼보 S90L의 에어 서스펜션 옵션은 정말 추가할 장점이 확실한가요?</div>
+                <div class="faq-answer">
+                    A3. 네, 기존의 코일 스프링 구조를 탑재한 모델도 고속 선회 주행에서는 독일식 비즈니스 세단 특유의 탄탄하고 믿음직한 롤링 억제력을 선사했으나, 거친 과속 방지턱을 통과할 때는 간헐적으로 충격 흡수가 딱딱하다는 비판이 있었습니다. 2026년 사양부터 도입된 에어 서스펜션 선택 등급은 후륜 축에 들어오는 불쾌한 여과 진동을 능동적으로 감쇠해 주므로, 정숙성을 높여 장거리 패밀리카로 활용하기에 확실한 장점을 가지고 있습니다.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q4. 할부, 일시불, 장기 렌트, 운용 리스 중에서 월 지출 요금을 가장 낮추는 팁은 무엇입니까?</div>
+                <div class="faq-answer">
+                    A4. 월 고정 지출을 최소화하고 초기 취등록세 금액이나 자동차세 등의 비용 부담을 줄이려면 비즈니스 명의의 다이렉트 리스 상품 이용을 적극적으로 권해드립니다. 만기 시점에 잔존 가치를 제외한 잔여 차량 대금의 이용 원금에 대해서만 이율이 적용되므로 매달 청구되는 대여 비용을 제일 저렴하게 낮출 수 있습니다. 또한 세무 회계상의 리스료 경비 처리가 전액 인정되므로 세금 감면 혜택을 동시에 극대화할 수 있습니다.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q5. 플러그인 하이브리드 T8 AWD 모델과 B5 마일드 하이브리드의 실질적인 유지 비용 편차는 대략 얼마 정도 날까요?</div>
+                <div class="faq-answer">
+                    A5. S90 T8 모델의 복합 공인 연비는 13.0km/l 수준이지만, 1회 충전 시 기름 한 방울 사용하지 않고 배터리 모터 구동만으로 59km 내외의 단거리를 순수 전기 주행할 수 있습니다. 자택이나 업무 공간에 항시 완속 충전 장비 시설이 구비되어 계신 상황이라면 연간 유류비 지출은 B5 MHEV 모델과 비교할 때 평균 반토막 이하 수준으로 차이를 절감할 수 있으며, 주행 거리 누적이 높을수록 2천만 원에 달하는 차량 기본 판매가 편차의 초기 자금을 빠르게 회수할 수 있는 장점을 발휘합니다.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>공식 참조 기관 정보 자료 안내</h2>
+            <p>볼보 S90L 세단의 더욱 전문적이고 객관적인 공인 데이터를 열람하기 원하신다면 아래의 정식 포털 기관 및 상세 백과 링크를 방문하여 실시간 최신 분석 지표를 참조해 보세요.</p>
+            <ul class="reference-list">
+                <li>
+                    <a href="https://directocheckx.koreahankang.com" target="_blank" rel="noopener noreferrer">
+                        볼보 S90L 종합 제원 및 공식 테크니컬 리포트 (Reliabledone Automotive Database)
+                    </a>
+                    <span>국가별 세부 휠베이스 세팅 편차 및 글로벌 충돌 안정성 덤핑 데이터 등의 공인 스펙 정보를 조회하실 수 있습니다.</span>
+                </li>
+                <li>
+                    <a href="https://namu.wiki/w/%EB%B3%BC%EB%B3%B4%20S90" target="_blank" rel="noopener noreferrer">
+                        나무위키 볼보 S90 상세 정보 문서 바로가기
+                    </a>
+                    <span>1세대 900시리즈 후속 변천사부터 2세대 2차 페이스리프트 연혁까지 전체 역사와 미디어 속 다양한 트리비아를 제공합니다.</span>
+                </li>
+                <li>
+                    <a href="https://www.volvocars.com/kr/cars/s90-hybrid/" target="_blank" rel="noopener noreferrer">
+                        볼보자동차코리아 공식 S90 마일드 하이브리드 제품 웹사이트
+                    </a>
+                    <span>국내에 수입 정식 발매되는 옵션표, 시승 신청, 카탈로그 사양 및 딜러사 전시장 연계 서비스센터 운영 현황을 확인할 수 있습니다.</span>
+                </li>
+            </ul>
+        </section>
+
     </main>
-  </body>
-</html>
+
+  
+
+    <script>
+        // FAQ Accordion Trigger
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                
+                // Hide all answers
+                document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+                
+                // Toggle current answer
+                answer.style.display = isVisible ? 'none' : 'block';
+            });
+        });
+
+        // Live Calculator Function
+        function calculateQuote() {
+            const trimPrice = parseInt(document.getElementById('trim_select').value);
+            const purchaseType = document.getElementById('purchase_type').value;
+            const depositPercent = parseInt(document.getElementById('deposit_range').value);
+            const periodMonths = parseInt(document.getElementById('period_select').value);
+
+            // Update range percentage label
+            document.getElementById('deposit_val').innerText = depositPercent + '%';
+
+            // Base math
+            const acquisitionTax = Math.floor(trimPrice * 0.07);
+            const depositAmount = Math.floor(trimPrice * (depositPercent / 100));
+            const financedAmount = trimPrice - depositAmount;
+
+            let interestRate = 0.048; // 4.8% standard
+            if (purchaseType === 'lease') interestRate = 0.052; // Lease rate
+            else if (purchaseType === 'rent') interestRate = 0.058; // Rent rate
+            else if (purchaseType === 'cash') interestRate = 0.00; // Cash
+
+            let monthlyPayment = 0;
+            if (purchaseType === 'cash') {
+                monthlyPayment = 0;
+            } else {
+                const totalInterest = financedAmount * interestRate * (periodMonths / 12);
+                monthlyPayment = Math.floor((financedAmount + totalInterest) / periodMonths);
+            }
+
+            // Display update
+            document.getElementById('car_price_display').innerText = trimPrice.toLocaleString() + ' 원';
+            document.getElementById('tax_display').innerText = acquisitionTax.toLocaleString() + ' 원';
+            document.getElementById('deposit_display').innerText = depositAmount.toLocaleString() + ' 원';
+            document.getElementById('monthly_display').innerText = purchaseType === 'cash' ? '0 원 (일시불 납입 완료)' : monthlyPayment.toLocaleString() + ' 원';
+        }
+
+        // Diagnostic Diagnostic Tool
+        function runDiagnostic() {
+            const q1 = document.getElementById('diag_q1').value;
+            const q2 = document.getElementById('diag_q2').value;
+            const q3 = document.getElementById('diag_q3').value;
+
+            let resultTrim = '';
+            let resultDesc = '';
+
+            if (q2 === 'performance' || q1 === 'long') {
+                resultTrim = '볼보 S90 T8 AWD 울트라 브라이트 (PHEV)';
+                resultDesc = '주행거리가 많고, 전기의 정숙성과 강력한 합산 마력(455마력) 출력을 일상에서 가득 만끽하고픈 운전자분께 가장 알맞은 하이엔드 최선의 권장 등급입니다.';
+            } else if (q3 === 'airsus') {
+                resultTrim = '볼보 S90 B5 울트라 브라이트 + 에어 서스펜션 추가 사양';
+                resultDesc = '방지턱과 노면의 미세 잔떨림 차단이 절대적으로 우선인 고객님께는 후륜 리어 서스펜션 옵션이 결합된 7,390만 원짜리 최신 사양을 추천 드립니다.';
+            } else if (q2 === 'luxury') {
+                resultTrim = '볼보 S90 B5 울트라 브라이트';
+                resultDesc = '바워스앤윌킨스 오디오 시스템 및 가죽 마사지 통풍 조절 장치, 화려한 오레포스 기어 노브의 감성이 골고루 설계되어 패밀리카 및 오너 중심 주행에서 제일 선호도 순위가 높은 가치형 모델입니다.';
+            } else {
+                resultTrim = '볼보 S90 B5 플러스 브라이트';
+                resultDesc = '기본 등급으로 설계되었으나 볼보가 지향하는 전설적인 고안전 사양이 완벽하게 적용되어 있으므로 실구매 예산을 슬림하게 잡으려는 분들께 가장 현명한 고가성비 트림입니다.';
+            }
+
+            const resultBox = document.getElementById('diag_result_box');
+            document.getElementById('diag_result_title').innerText = resultTrim;
+            document.getElementById('diag_result_desc').innerText = resultDesc;
+            resultBox.style.display = 'block';
+        }
+
+        // Run calculator on initial load
+        window.onload = function() {
+            calculateQuote();
+        };
+    </script>
+  
